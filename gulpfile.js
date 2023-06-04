@@ -6,9 +6,7 @@ const path = require("./gulpfile/config/path.js");
 //const app = require('./gulpfile/config/app.js');
 
 
-const fileinclude = require('gulp-file-include');
-const webpHtml = require('gulp-webp-html');
-const prettyHtml = require('gulp-pretty-html');
+
 
 const newer = require('gulp-newer');
 const imagemin = require("gulp-imagemin");
@@ -26,21 +24,9 @@ const rm = require('gulp-rm');
 
 
 const style = require("./gulpfile/task/sass.js");
+const html = require("./gulpfile/task/html.js");
 
-// HTML //
-const html = () => {
-  return src('src/html/index.html')
-    .pipe(plumber({
-      errorHandler: notify.onError(error => ({
-        title: 'HTML',
-        message: error.message
-      }))
-    }))
-    .pipe(fileinclude())
-    .pipe(prettyHtml())
-    .pipe(webpHtml())
-    .pipe(dest('./build/'))
-}
+
 
 
 
