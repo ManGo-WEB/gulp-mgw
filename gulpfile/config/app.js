@@ -1,10 +1,10 @@
 module.exports = {
-  isProd: isProd,
-  isDev: isDev,
+  // isProd: isProd,
+  // isDev: isDev,
 
-  htmlmin: {
-    collapseWhitespace: isProd
-  },
+  // htmlmin: {
+  //   collapseWhitespace: isProd
+  // },
 
   
   imagemin: {
@@ -16,8 +16,26 @@ module.exports = {
   },
 
   scss: {
-    importer: require('node-sass-tilde-importer'),
+    //importer: require('node-sass-tilde-importer'),
     outputStyle: 'compressed'
+  },
+
+  svgo: {
+    plugins: [
+      {
+        removeAttrs: {
+          attrs: '(fill|stroke|width|height|style|data.*)'
+        }
+      }
+    ]
+  },
+
+  svgSprite: {
+    mode: {
+      symbol: {
+        sprite: '../sprite.svg'
+      }
+    }
   },
 
   favicons: {
