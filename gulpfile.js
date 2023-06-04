@@ -7,7 +7,7 @@ const app = require('./gulpfile/config/app.js');
 
 
 
-const rm = require('gulp-rm');
+
 
 // Tasks //
 const style = require("./gulpfile/task/sass.js");
@@ -16,16 +16,7 @@ const svg = require("./gulpfile/task/svg.js");
 const img = require("./gulpfile/task/images.js");
 const js = require("./gulpfile/task/js.js");
 const favicon = require("./gulpfile/task/favicon.js");
-
-
-
-
-
-// CLEAN //
-const clean = () => {
-  return src('./build/**/*', {read: false})
-    .pipe(rm())
-}
+const clean = require("./gulpfile/task/clean.js");
 
 // SERVER //
 const server = () => {
