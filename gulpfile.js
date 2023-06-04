@@ -23,6 +23,9 @@ const babel = require('gulp-babel');
 const favicons = require('gulp-favicons');
 const filter = require('gulp-filter');
 
+const svgo = require('gulp-svgo');
+const svgSprite = require('gulp-svg-sprite');
+
 
 // HTML //
 const html = () => {
@@ -125,9 +128,41 @@ const favicon = () => {
     .pipe(dest('./build/img/favicon/'))
 }
 
+// SVG //
+const svgoConfig = {
+  plugins: [
+    {
+      removeAttrs: {
+        attrs: '(fill|stroke|width|height|style|data.*)'
+      }
+    }
+  ]
+}
+const svgSpriteConfig = {
+  mode: {
+    symbol: {
+      sprite: '../sprite.svg'
+    }
+  }
+}
+
+const svg = () => {
+  return src('./src/img/icons/**/*.svg')
+  .pipe(plumber({
+    errorHandler: notify.onError(error => ({
+      title: 'SVG',
+      message: error.message
+    }))
+  }))
+  .pipe(svgo(svgoConfig))
+  .pipe(svgSprite(svgSpriteConfig))
+  .pipe(dest('./build/img/'))
+}
+
 
 exports.scss = scss;
 exports.html = html;
 exports.img = img;
 exports.js = js;
 exports.favicon = favicon;
+exports.svg = svg;
