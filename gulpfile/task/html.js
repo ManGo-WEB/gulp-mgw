@@ -4,12 +4,12 @@ const {src, dest} = require('gulp');
 const path = require('../config/path.js');
 //const app = require("./gulpfile/config/app.js");
 
+// Plugins //
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const fileinclude = require('gulp-file-include');
 const webpHtml = require('gulp-webp-html');
 const prettyHtml = require('gulp-pretty-html');
-
 
 // HTML //
 const html = () => {
