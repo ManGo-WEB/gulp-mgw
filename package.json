@@ -1,0 +1,11 @@
+{
+  "name": "gulp-mgw",
+  "version": "1.0.0",
+  "description": "Starter Gulp4 template (SCSS, HTML, JS, WebP, SVG)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MGWStudio",
+  "license": "ISC"
+}
