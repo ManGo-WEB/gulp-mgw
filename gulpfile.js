@@ -26,6 +26,10 @@ const filter = require('gulp-filter');
 const svgo = require('gulp-svgo');
 const svgSprite = require('gulp-svg-sprite');
 
+const rm = require('gulp-rm');
+
+const browserSync = require('browser-sync').create();
+
 
 // HTML //
 const html = () => {
@@ -160,6 +164,21 @@ const svg = () => {
   .pipe(dest('./build/img/'))
 }
 
+// CLEAN //
+const clean = () => {
+  return src('./build/**/*', {read: false})
+    .pipe(rm())
+}
+
+// SERVER //
+const server = () => {
+  browserSync.init({
+    server: {
+      baseDir: './build/'
+    }
+  });
+}
+
 
 exports.scss = scss;
 exports.html = html;
@@ -167,3 +186,5 @@ exports.img = img;
 exports.js = js;
 exports.favicon = favicon;
 exports.svg = svg;
+exports.clean = clean;
+exports.server = server;
