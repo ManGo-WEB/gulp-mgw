@@ -92,3 +92,4 @@ const js = () => {
 exports.scss = scss;
 exports.html = html;
 exports.img = img;
+exports.js = js;
