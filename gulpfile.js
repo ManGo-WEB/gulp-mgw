@@ -18,6 +18,8 @@ const newer = require('gulp-newer');
 const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 
+const babel = require('gulp-babel');
+
 
 // HTML //
 const html = () => {
@@ -69,7 +71,21 @@ const img = () => {
     .pipe(newer('build/img/'))
     .pipe(imagemin())
     .pipe(dest('./build/img/'))
+}
 
+// JS //
+const js = () => {
+  return src('./src/js/main.js')
+  .pipe(plumber({
+    errorHandler: notify.onError(error => ({
+      title: 'JS',
+      message: error.message
+    }))
+  }))
+  .pipe(babel({
+      presets: ['@babel/env']
+  }))
+  .pipe(dest('./build/js/'))
 }
 
 
