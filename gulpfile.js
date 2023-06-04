@@ -20,6 +20,9 @@ const webp = require("gulp-webp");
 
 const babel = require('gulp-babel');
 
+const favicons = require('gulp-favicons');
+const filter = require('gulp-filter');
+
 
 // HTML //
 const html = () => {
@@ -88,8 +91,43 @@ const js = () => {
   .pipe(dest('./build/js/'))
 }
 
+// FAVICON //
+const favicon = () => {
+  return src('./src/img/favicon/favicon.svg')
+    .pipe(plumber({
+      errorHandler: notify.onError(error => ({
+        title: 'Favicon',
+        message: error.message
+      }))
+    }))
+    .pipe(dest('./build/img/favicon/'))
+    .pipe(favicons({
+      appName: 'My App',
+      appShortName: 'App',
+      appDescription: 'This is my application',
+      developerName: '',
+      developerURL: '',
+      background: '#fff',
+      path: "img/favicon/",
+      icons: {
+        favicons: true,
+        appleIcon: true,
+        android: true,
+        windows: false,
+        yandex: false,
+        coast: false,
+        firefox: false,
+        appleStartup: false
+      }  
+    }))
+    .pipe(dest('./build/img/favicon/'))
+    .pipe(filter(['favicon.ico', 'apple-touch-icon.png', 'manifest.json']))
+    .pipe(dest('./build/img/favicon/'))
+}
+
 
 exports.scss = scss;
 exports.html = html;
 exports.img = img;
 exports.js = js;
+exports.favicon = favicon;
