@@ -17,14 +17,14 @@ const babel = require('gulp-babel');
 const favicons = require('gulp-favicons');
 const filter = require('gulp-filter');
 
-const svgo = require('gulp-svgo');
-const svgSprite = require('gulp-svg-sprite');
+
 
 const rm = require('gulp-rm');
 
 
 const style = require("./gulpfile/task/sass.js");
 const html = require("./gulpfile/task/html.js");
+const svg = require("./gulpfile/task/svg.js");
 
 
 
@@ -99,35 +99,24 @@ const favicon = () => {
 }
 
 // SVG //
-const svgoConfig = {
-  plugins: [
-    {
-      removeAttrs: {
-        attrs: '(fill|stroke|width|height|style|data.*)'
-      }
-    }
-  ]
-}
-const svgSpriteConfig = {
-  mode: {
-    symbol: {
-      sprite: '../sprite.svg'
-    }
-  }
-}
+// const svgoConfig = {
+//   plugins: [
+//     {
+//       removeAttrs: {
+//         attrs: '(fill|stroke|width|height|style|data.*)'
+//       }
+//     }
+//   ]
+// }
+// const svgSpriteConfig = {
+//   mode: {
+//     symbol: {
+//       sprite: '../sprite.svg'
+//     }
+//   }
+// }
 
-const svg = () => {
-  return src('./src/img/icons/**/*.svg')
-  .pipe(plumber({
-    errorHandler: notify.onError(error => ({
-      title: 'SVG',
-      message: error.message
-    }))
-  }))
-  .pipe(svgo(svgoConfig))
-  .pipe(svgSprite(svgSpriteConfig))
-  .pipe(dest('./build/img/'))
-}
+
 
 // CLEAN //
 const clean = () => {
