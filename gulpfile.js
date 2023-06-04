@@ -3,14 +3,12 @@ const {watch, series, parallel} = require('gulp');
 const browserSync = require('browser-sync').create();
 
 const path = require("./gulpfile/config/path.js");
-//const app = require('./gulpfile/config/app.js');
+const app = require('./gulpfile/config/app.js');
 
 
 
 
-const newer = require('gulp-newer');
-const imagemin = require("gulp-imagemin");
-const webp = require("gulp-webp");
+
 
 const babel = require('gulp-babel');
 
@@ -25,29 +23,7 @@ const rm = require('gulp-rm');
 const style = require("./gulpfile/task/sass.js");
 const html = require("./gulpfile/task/html.js");
 const svg = require("./gulpfile/task/svg.js");
-
-
-
-
-
-// IMAGES //
-const img = () => {
-  return src('./src/img/**/*.*')
-    .pipe(plumber({
-      errorHandler: notify.onError(error => ({
-        title: 'Images',
-        message: error.message
-      }))
-    }))
-    .pipe(newer('build/img/'))
-    .pipe(webp())    
-    .pipe(dest('./build/img/'))
-
-    .pipe(src('./src/img/**/*.*'))
-    .pipe(newer('build/img/'))
-    .pipe(imagemin())
-    .pipe(dest('./build/img/'))
-}
+const img = require("./gulpfile/task/images.js");
 
 // JS //
 const js = () => {
@@ -97,26 +73,6 @@ const favicon = () => {
     .pipe(filter(['favicon.ico', 'apple-touch-icon.png', 'manifest.json']))
     .pipe(dest('./build/img/favicon/'))
 }
-
-// SVG //
-// const svgoConfig = {
-//   plugins: [
-//     {
-//       removeAttrs: {
-//         attrs: '(fill|stroke|width|height|style|data.*)'
-//       }
-//     }
-//   ]
-// }
-// const svgSpriteConfig = {
-//   mode: {
-//     symbol: {
-//       sprite: '../sprite.svg'
-//     }
-//   }
-// }
-
-
 
 // CLEAN //
 const clean = () => {
