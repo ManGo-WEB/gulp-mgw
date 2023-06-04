@@ -1,13 +1,8 @@
+@import 'config/**/*.scss';
+@import 'mixins/**/*.scss';
+@import 'libs/**/*.scss';
 @import 'components/**/*.scss';
 
 body {
   background-color: #fff;
-
-  footer {
-    background-color: #ccc;
-  }
-}
-h1 {
-  color: red;
-  transition: all 0.5s;
 }
