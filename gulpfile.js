@@ -5,40 +5,19 @@ const browserSync = require('browser-sync').create();
 const path = require("./gulpfile/config/path.js");
 const app = require('./gulpfile/config/app.js');
 
-
-
-
-
-
-const babel = require('gulp-babel');
-
 const favicons = require('gulp-favicons');
 const filter = require('gulp-filter');
 
-
-
 const rm = require('gulp-rm');
 
-
+// Tasks //
 const style = require("./gulpfile/task/sass.js");
 const html = require("./gulpfile/task/html.js");
 const svg = require("./gulpfile/task/svg.js");
 const img = require("./gulpfile/task/images.js");
+const js = require("./gulpfile/task/js.js");
 
-// JS //
-const js = () => {
-  return src('./src/js/main.js')
-  .pipe(plumber({
-    errorHandler: notify.onError(error => ({
-      title: 'JS',
-      message: error.message
-    }))
-  }))
-  .pipe(babel({
-      presets: ['@babel/env']
-  }))
-  .pipe(dest('./build/js/'))
-}
+
 
 // FAVICON //
 const favicon = () => {
