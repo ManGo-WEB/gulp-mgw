@@ -46,13 +46,13 @@ const html = () => {
     .pipe(dest('./build/'))
 }
 
-// // SCSS //
-const scss = () => {
-  return src('src/scss/main.scss')
+// SASS & SCSS //
+const sass = () => {
+  return src('src/sass/main.scss')
     .pipe(sourcemaps.init())
     .pipe(plumber({
       errorHandler: notify.onError(error => ({
-        title: 'SCSS',
+        title: 'SASS',
         message: error.message
       }))
     }))
