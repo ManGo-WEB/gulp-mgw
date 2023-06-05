@@ -9,6 +9,8 @@ const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
+const rename = require("gulp-rename");
+const uglify = require('gulp-uglify');
 
 // JS //
 const js = () => {
@@ -22,7 +24,10 @@ const js = () => {
   }))
   .pipe(babel({
       presets: ['@babel/env']
-  }))
+  }))  
+  .pipe(dest(path.js.dest))
+  .pipe(uglify())
+  .pipe(rename({ suffix: '.min' }))
   .pipe(sourcemaps.write('.'))
   .pipe(dest(path.js.dest))
 }
