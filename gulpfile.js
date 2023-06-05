@@ -56,3 +56,5 @@ exports.clean = clean;
 exports.font = font;
 exports.server = server;
 exports.build = build;
+
+exports.default = series(build, parallel(server, watcher));
