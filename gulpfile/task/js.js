@@ -8,10 +8,12 @@ const app = require("../config/app.js");
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const babel = require('gulp-babel');
+const sourcemaps = require('gulp-sourcemaps');
 
 // JS //
 const js = () => {
   return src(path.js.src)
+  .pipe(sourcemaps.init())
   .pipe(plumber({
     errorHandler: notify.onError(error => ({
       title: 'JS',
@@ -21,6 +23,7 @@ const js = () => {
   .pipe(babel({
       presets: ['@babel/env']
   }))
+  .pipe(sourcemaps.write('.'))
   .pipe(dest(path.js.dest))
 }
 
