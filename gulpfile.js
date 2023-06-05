@@ -15,6 +15,16 @@ const favicon = require("./gulpfile/task/favicon.js");
 const clean = require("./gulpfile/task/clean.js");
 const font = require("./gulpfile/task/font.js");
 
+// WATCHER //
+const watcher = () => {
+  watch(path.html.watch, html).on('all', browserSync.reload);
+  watch(path.scss.watch, style).on('all', browserSync.reload);
+  watch(path.js.watch, js).on('all', browserSync.reload);
+  watch(path.img.watch, img).on('all', browserSync.reload);
+  watch(path.font.watch, font).on('all', browserSync.reload);
+  watch(path.favicon.watch, favicon).on('all', browserSync.reload);
+}
+
 // SERVER //
 const server = () => {
   browserSync.init({
@@ -24,7 +34,18 @@ const server = () => {
   });
 }
 
+// BUILD //
+const build = series(
+  clean,
+  parallel(html, style, js, font, img, favicon, svg)
+);
 
+const dev = series(
+  build,
+  parallel(server, watcher)
+);
+
+// PUBLIC //
 exports.style = style;
 exports.html = html;
 exports.img = img;
@@ -34,3 +55,4 @@ exports.svg = svg;
 exports.clean = clean;
 exports.font = font;
 exports.server = server;
+exports.build = build;
